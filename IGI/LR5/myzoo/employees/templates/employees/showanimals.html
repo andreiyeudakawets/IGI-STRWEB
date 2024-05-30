@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ user.first_name }}'s animals</h1>
+
+<ul>
+  {% for animal in animals %}
+    <li>
+      {% if animal.image %}
+        <img src="{{ animal.image.url }}" alt="{{ animal.name }} Image" height="100">
+      {% else %}
+        No photo available
+      {% endif %}
+      {{ animal.name }} | Feed per day: {{ animal.amount_of_feed }}g
+      | Countries:
+      {% for country in animal.country.all %}
+        {{ country.name }}
+      {% endfor %}
+      | Class: {{ animal.animal_class }}
+      | Date of arrival at the zoo: {{ animal.time_create.date }}
+    </li>
+  {% empty %}
+    <li>No animals assigned</li>
+  {% endfor %}
+</ul>
+{% endblock %}

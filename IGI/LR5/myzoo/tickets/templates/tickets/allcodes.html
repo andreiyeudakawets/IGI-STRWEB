@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>All Promo Codes</h1>
+    {% if user.is_superuser %}
+        <a href="{% url 'tickets:add_promo' %}">Add code</a>
+    {% endif %}
+    {% if codes %}
+        {% for code in codes %}
+            <p>
+                {{ code.code }} | Скидка {{ code.discount_percentage }}
+                {% if user.is_superuser %}
+                    <a href="{% url 'tickets:edit_code' code_id=code.id %}">Edit | </a>
+                    <a href="{% url 'tickets:del_code' code_id=code.id %}">Delete</a>
+                {% endif %}
+            </p>
+        {% endfor %}
+    {% else %}
+        <p>No promo codes available</p>
+    {% endif %}
+{% endblock %}

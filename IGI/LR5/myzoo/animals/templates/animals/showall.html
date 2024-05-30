@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Animals</h1>
+  {% if user.is_superuser %}
+    <a href="{% url 'animals:add_animal' %}">Добавить животное</a>
+  {% endif %}
+  <form action="{% url 'animals:sort_animals' %}" method="GET">
+    <label for="sort_param">Sort by:</label>
+    <select name="sort_param" id="sort_param">
+      <option value="">-- Select --</option>
+      <option value="name">Name</option>
+      <option value="age">Age</option>
+      <option value="amount_of_feed">Amount of feed</option>
+    </select>
+    <button type="submit">Sort</button>
+  </form>
+
+  <form action="{% url 'animals:search_animals' %}" method="GET">
+    <input type="text" name="q" placeholder="Search by name" value="{{ search_query }}">
+    <button type="submit">Search</button>
+  </form>
+  {% if animals %}
+    <table style="border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th style="border: 1px solid black;">Name</th>
+          <th style="border: 1px solid black;">Gender</th>
+          <th style="border: 1px solid black;">Age</th>
+          <th style="border: 1px solid black;">Country</th>
+          <th style="border: 1px solid black;">Amount of Feed (per day)</th>
+          <th style="border: 1px solid black;">Family</th>
+          <th style="border: 1px solid black;">Responsible employee</th>
+          <th style="border: 1px solid black;">Room</th>
+          <th style="border: 1px solid black;">Photo</th>
+          {% if user.is_superuser %}
+          <th style="border: 1px solid black;">Time create/update</th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for animal in animals %}
+          <tr>
+            <td style="border: 1px solid black;">{{ animal.name }}</td>
+            <td style="border: 1px solid black;">{{ animal.gender }}</td>
+            <td style="border: 1px solid black;">{{ animal.age }}</td>
+            <td style="border: 1px solid black;">
+              {% for country in animal.country.all %}
+                {{ country.name }}
+                {% if not forloop.last %}, {% endif %}
+              {% endfor %}
+            </td>
+            <td style="border: 1px solid black;">{{ animal.amount_of_feed }} g</td>
+            <td style="border: 1px solid black;">{{ animal.animal_class.name }} </td>
+            <td style="border: 1px solid black;">{{ animal.responsible_employee }}</td>
+            <td style="border: 1px solid black;">{{ animal.responsible_employee.room }} </td>
+            <td style="border: 1px solid black;">
+              {% if animal.image %}
+                <img src="{{ animal.image.url }}" alt="{{ animal.name }} Image" height="100">
+              {% else %}
+                No photo available
+              {% endif %}
+            </td>
+            {% if user.is_superuser %}
+            <td style="border: 1px solid black;">{{ animal.time_create }}/{{ animal.time_update }}</td>
+            <td ><a href="/animals/edit/{{animal.id}}">Edit</a> | <a href="/animals/delete/{{animal.id}}">Delete</a></td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No animals found.</p>
+  {% endif %}
+{% endblock %}

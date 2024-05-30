@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Random Cat Facts</h1>
+    {% if data %}
+        <ul>
+        {% for fact in data %}
+            <li>{{ fact.fact }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No cat facts available</p>
+    {% endif %}
+
+{% endblock %}

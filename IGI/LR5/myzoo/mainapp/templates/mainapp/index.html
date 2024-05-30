@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    <br>
+    <h2> Последняя новость: {{ latest_news }} Дата {{ latest_news.time_create }}</h2>
+                <br>
+                    <img src="{{ latest_news.image.url }}" alt="Изображение" height="100">
+                <br>
+                <p> {{ latest_news.content }} </p>
+    <h1>Календарь</h1>
+    {{ cal|safe }}
+    <p>Текущий UTC: {{ user_timezone }}</p>
+    <p>Текущая дата: {{ current_date }}</p>
+
+  {% endif %}
+{% endblock %}

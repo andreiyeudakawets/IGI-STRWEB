@@ -1,0 +1,14 @@
+<!-- user_tickets.html -->
+
+
+
+{% block content %}
+    <h1>User Tickets</h1>
+    <ul>
+        {% for ticket in tickets %}
+            <li>{{ ticket }} Price: {{ ticket.price }} Date: {{ ticket.weekday }}</li>
+        {% empty %}
+            <li>No tickets found.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

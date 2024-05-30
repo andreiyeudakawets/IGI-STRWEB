@@ -1,0 +1,8 @@
+
+<h1>promo code</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" name="check_price">Confirm</button>
+</form>

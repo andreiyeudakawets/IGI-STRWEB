@@ -1,0 +1,28 @@
+<!-- room_list.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>All Rooms</h1>
+
+<ul>
+  {% if user.is_superuser %}
+    <a href="{% url 'rooms:add_room'  %}">Add room</a>
+  {% endif %}
+  {% for room in rooms %}
+    <li>
+      {% if room.image %}
+            <img src="{{ room.image.url }}" alt="{{ room.title }} Image" height="140">
+        {% endif %}
+      Number: {{ room.number }} | Title: {{ room.title }} | Pond: {{ room.pond }} | Heating: {{ room.heating }}</li>
+    {% if user.is_superuser %}
+      {{ room.time_create }} | {{ room.time_update }}
+      <a href="{% url 'rooms:edit_room' id=room.id  %}">Edit </a> |
+      <a href="{% url 'rooms:delete_room' id=room.id  %}">Delete</a>
+    {% endif %}
+    <br>
+  {% empty %}
+    <li>No rooms available</li>
+  {% endfor %}
+</ul>
+{% endblock %}

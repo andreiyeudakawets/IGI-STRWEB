@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Reviews</h1>
+    <a href="{% url 'mainapp:add_review' %}">Add review</a>
+    {% if reviews %}
+        {% for re in reviews %}
+            <p>
+                {{ re.user.username }} | rating {{ re.rating }} | text {{ re.text }} | {{ re.date }}
+                {% if user.is_superuser %}
+                    <a href="{% url 'mainapp:delete_review' id=re.id %}">Delete</a>
+                {% endif %}
+            </p>
+        {% endfor %}
+    {% else %}
+        <p>No promo codes available</p>
+    {% endif %}
+{% endblock %}

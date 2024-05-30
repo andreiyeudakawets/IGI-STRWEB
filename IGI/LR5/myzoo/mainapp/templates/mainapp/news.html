@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>News List</h1>
+    <ul>
+        {% for new in news %}
+            <li>
+                <h2> {{ new }} </h2>
+                <br>
+                    <img src="{{ new.image.url }}" alt="Изображение" height="100">
+                <br>
+                <p> {{ new.content }} </p>
+            </li>
+        {% empty %}
+            <li>No newss found.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

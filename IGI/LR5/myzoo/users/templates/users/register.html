@@ -1,0 +1,33 @@
+<!-- registration/register.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+    <h1>Register</h1>
+    <form method="POST">
+    {% csrf_token %}
+            {% if messages %}
+                <table class="messages-table">
+                    <thead>
+                        {% for message in messages %}
+                        <tr>
+                            <th> {{ message }}</th>
+                        </tr>
+                        {% endfor %}
+                    </thead>
+                </table>
+                {% endif %}
+
+        {{ form.as_p }}
+
+    
+
+    <button type="submit">Register</button>
+</form>
+</body>
+</html>
