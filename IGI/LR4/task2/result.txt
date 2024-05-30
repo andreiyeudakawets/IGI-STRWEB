@@ -1,0 +1,10 @@
+All sentences - 4
+. - 2, ? - 1, ! - 1
+Avarage length of sentence = 4.555555555555555
+Avarage length of words = 4.823529411764706
+Smiles: 3
+A-Z words: 1
+Longest word starting with l: longmegasuper
+Upper+number words: ['SS3']
+Password dwdd is not reliable
+Duplicate words: ['The', 'dop', 'yes']
