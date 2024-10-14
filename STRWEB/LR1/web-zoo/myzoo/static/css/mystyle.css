@@ -1,0 +1,41 @@
+/*.menu a{*/
+
+/*}*/
+
+/*.menu .nav_link{*/
+
+/*}*/
+
+/*nav > a{*/
+
+/*}*/
+
+a.nav_link {
+    text-decoration: none;
+    font-family: Jost;
+    font-size: 25px;
+    font-weight: 300;
+    line-height: 36px;
+    font-style: normal;
+    color: black;
+}
+
+/*nav a {*/
+/*    text-decoration: none;*/
+/*    font-family: Jost;*/
+/*    font-size: 25px;*/
+/*    font-weight: 300;*/
+/*    line-height: 36px;*/
+/*    font-style: normal;*/
+/*    color: black;*/
+/*}*/
+
+header {
+    background-color: silver;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+

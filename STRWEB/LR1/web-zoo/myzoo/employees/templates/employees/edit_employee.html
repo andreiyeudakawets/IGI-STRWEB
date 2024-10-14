@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Edit Employee</h2>
+
+        {% if employee.image %}
+            <img src="{{ employee.image.url }}" alt="User Image" height="140">
+        {% endif %}
+    <p> {{ employee.phone_number }} </p>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <h1>Edit position name</h1>
+        {{ pos_form.as_p }}
+
+        <button type="submit">Confirm</button>
+    </form>
+
+{% endblock %}

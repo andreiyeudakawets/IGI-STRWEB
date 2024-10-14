@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="faq_section">
+    <h2>Questions</h2>
+    {% for question in questions %}
+        <details>
+            <summary><b>{{question}}</b> <em>{{ question.date_added}}</em></summary>
+            <em><u>{{question.answer}}</u></em>
+        </details>
+        {% empty %}
+            <p>No questions found.</p>
+    {% endfor %}
+</section>
+{% endblock %}

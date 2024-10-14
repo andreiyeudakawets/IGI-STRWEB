@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<article class="latest_news">
+    <h2> {{ news }}</h2>
+    <div class="latest_flex">
+        <img src="{{ news.image.url }}" alt="Изображение" height="100">
+        <p class="news_content"> {{ news.content}} </p>
+    </div>
+    <p class="news_date" style="text-align: end;"><em>Дата: {{ news.time_create }}</em></p>
+</article>
+{% endblock %}

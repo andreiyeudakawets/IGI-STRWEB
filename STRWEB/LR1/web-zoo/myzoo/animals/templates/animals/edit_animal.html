@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Edit Animal</h2>
+        {% if form.instance.image %}
+            <img class="animal_image" src="{{ form.instance.image.url }}" alt="Animal Image" height="100">
+        {% endif %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.name.label_tag }} {{ form.name }} <br><br>
+        {{ form.gender.label_tag }} {{ form.gender }} <br><br>
+        {{ form.age.label_tag }} {{ form.age }} <br><br>
+        {{ form.country.label_tag }} {{ form.country }} <br><br>
+        {{ form.amount_of_feed.label_tag }} {{ form.amount_of_feed }} <br><br>
+        {{ form.animal_class.label_tag }} {{ form.animal_class }} <br><br>
+        {{ form.responsible_employee.label_tag }} {{ form.responsible_employee }}
+        <a href="/employees/edit-employee/{{ form.responsible_employee.value }}/">Edit employee</a> <br><br>
+        {{ form.image.label_tag }} {{ form.image }} <br><br>
+
+        <button type="submit">Edit</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,22 @@
+<!-- animal_family_population.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Animal Family Population</h1>
+
+  <form method="get">
+    <label for="family">Select an Animal Family:</label>
+    <select name="family" id="family">
+      <option value="">-- Select --</option>
+      {% for family in families %}
+        <option value="{{ family.name }}" {% if family.name == selected_family %}selected{% endif %}>{{ family.name }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Submit</button>
+  </form>
+
+  {% if selected_family %}
+    <p>The total number of animals belonging to the "{{ selected_family }}" family in the zoo is: {{ total_animals_count }}</p>
+  {% endif %}
+{% endblock %}

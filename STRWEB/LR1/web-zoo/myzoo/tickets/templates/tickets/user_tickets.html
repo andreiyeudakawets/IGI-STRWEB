@@ -1,0 +1,12 @@
+<!-- user_tickets.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+        <h1>{{ user.username }}'s Tickets</h1>
+        {% for ticket in tickets %}
+                <h3>Ticket for {{ ticket.weekday }}</h3>
+                <p>Price: {{ ticket.price }}</p>
+        {% empty %}
+            <p>No tickets found.</p>
+        {% endfor %}
+{% endblock %}

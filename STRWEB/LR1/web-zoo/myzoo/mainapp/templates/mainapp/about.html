@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>{{ company.name }}</h2>
+
+    {% if company.logo %}
+    <img class="main_logo" src="{{ company.logo.url }}" alt="{{ company.name }} Image" height="100">
+<!--      <picture>-->
+<!--        <source media="(max-width: 700px)"-->
+<!--                sizes="(max-width: 500px) 40vw, 10vw"-->
+<!--               srcset="/media/company_logos/logo.jpg 138w, /media/company_logos/logo.jpg 138w">-->
+<!--        &lt;!&ndash;    <source media="(max-width: 1400px)"&ndash;&gt;-->
+<!--        &lt;!&ndash;        sizes="(max-width: 1000px) 100vw, 50vw"&ndash;&gt;-->
+<!--        &lt;!&ndash;       srcset="/media/company_logos/logo.jpg 416w,   /media/company_logos/logo.jpg 416w">&ndash;&gt;-->
+<!--        <img src="/media/company_logos/logo.jpg" alt="Logo">-->
+<!--    </picture>-->
+    {% else %}
+        No photo available
+    {% endif %}
+    <ol class="history_list">
+        <li value="2005">Роодился годжо сатору</li>
+        <li value="2022">Прибыл годжо сатору</li>
+        <li value="2024">Годжо сатору запечатали</li>
+    </ul>
+    <!-- <p>
+        {{ company.history }}
+    </p> -->
+    <!-- <br> <a href="{{ company.sertificate.url }}" download="certificate.pdf">Скачать сертификат</a> -->
+    <div class="certificate">
+        <h2>свидетельство</h2>
+        <h1>ЗООПАРК</h1>
+        <h3>о соотвествии нормам защиты прав животных</h3>
+        <div id="additional_info">
+            <p>2024</p>
+            <p>Минск</p>
+        </div>
+        <div class="main_info">
+            <p>Общество с ограниченной ответственностью "Zoo"</p>
+            <p><em>Рег. номер: 123-45-6-7</em></p>
+        </div>
+        <div class="sign">
+            <img src="/media/sign.jpg" alt="sign">
+            <br><span>Получатель<br>Евдоковец А. В.</span>
+        </div>
+        <hr>
+        <div class="certificate_footer">
+            <div class="cert_footer_item">
+                <img src="{{ company.logo.url }}" alt="{{ company.name }} Image" height="100">
+            </div>
+            <div class="cert_footer_item">
+                <ul class="cert_list">
+                    <li>+375(29)780-37-50</li>
+                    <li>andrejevdokovec@gmail.com</li>
+                    <li>Ул. Я. Коласа, д. 19</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="about">
+        <div>
+            {% if company.video %}
+            <video src="{{ company.video.url }}" width="360" height="240" controls>
+                erm
+            </video>
+            {% else %}
+                No video available
+            {% endif %}
+            <br>
+            <audio controls>
+                <source src="/media/audios/song.mp3" />
+                Audio content cannot be played
+            </audio>
+        </div>
+        <table>
+            <caption>Info</caption>
+            <tr>
+                <td><b>Address:</b></td>
+                <td>{{ company.address }}</td>
+            </tr>
+            <tr>
+                <td><b>Legal name:</b></td>
+                <td>{{ company.legal_name }}</td>
+            </tr>
+            <tr>
+                <td><b>Registration number:</b></td>
+                <td>{{ company.registration_number }}</td>
+            </tr>
+            <tr>
+                <td><b>Bank details:</b></td>
+                <td>{{ company.bank_details }}</td>
+            </tr>
+        </table>
+    </div>
+
+<div>
+  <blockquote cite="https://www.huxley.net/bnw/four.html" lang="ru">
+    <!-- <p> -->
+        История начала этого зоопарка достаточно проста: всё дело в том, что мне достался этот вариант по списку.
+    <!-- </p> -->
+  </blockquote>
+  <p>—Евдоковец Андрей, <cite>Brave New World</cite></p>
+  
+  <blockquote cite="https://www.huxley.net/bnw/four.html" lang="en">
+    History of ...
+  </blockquote>
+  <p>—Евдоковец Андрей, <cite>Brave New World</cite></p>
+</div>
+
+{% endblock %}

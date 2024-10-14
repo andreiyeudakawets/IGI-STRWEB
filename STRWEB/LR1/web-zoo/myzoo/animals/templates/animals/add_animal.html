@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Add Animal</h2>
+    <form class="form" id="add_animal_form" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+<!--        <div class="form_row">-->
+<!--            <span class="form_cell">{{ form.name.label_tag }}</span>-->
+<!--            <span class="form_cell">{{ form.name }}</span>-->
+<!--        </div><div class="form_row">-->
+<!--            <span class="form_cell">{{ form.gender.label_tag }}</span>-->
+<!--            <span class="form_cell">{{ form.gender }}</span>-->
+<!--        </div>-->
+
+        {{ form.as_p }}
+
+        <button type="submit">Add Animal</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="ticket_info">
+
+    <h2>Tickets</h2>
+    <p>Стоимость билета без учета скидок:<br>
+        <b>Будние дни:</b> <em>10 рублей.</em><br>
+        <b>Выходные дни:</b> <em>15 рублей.</em>
+    </p>
+
+    {% if price %}
+
+    {% else %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="check_price">Check Price</button>
+    </form>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="to cart">Check Price</button>
+    </form>
+    {% endif %}
+
+    {% if price %}
+    <h2>Price: {{ price }}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="buy">Buy</button>
+    </form>
+    {% endif %}
+</div>
+
+{% endblock %}

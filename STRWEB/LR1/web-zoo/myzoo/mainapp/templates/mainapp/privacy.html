@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="privacy">
+    <h2>Политика конфиденциальности</h2>
+    <a href="#n1">В конец</a>
+    <p>
+       Sic mundus, creatus est
+    </p><br><br><br><br><br><br><br><br><br><br><br>
+
+    <p><b><em>Номер телефона</em></b>: <a href="tel:80295006070">+375 (29) 500-60-70</a></p>
+    Не знаю, что <mark>сюда писать</mark>, поэтому напишу <mark>что-нибудь</mark>
+    <br>
+    <br>
+    I WANDERED lonely as a cloud<br>
+    That floats on high o'er vales and hills,<br>
+    When all at once I saw a crowd,<br>
+    A host, of golden daffodils;
+    <br>
+
+    <pre>
+    def hello(arg):
+        return f'Hello, {arg}!'
+
+
+    print(hello('Andrei'))
+    </pre>
+
+    <figure>
+    <figcaption>Listing example 2.</figcaption>
+        <code>
+            var fruits = ["apples", "oranges", "mangoes", "cherries"];<br>
+            document.writeln("I like " + fruits.length + " fruits");
+        </code>
+    </figure>
+
+    <ol reversed>
+      <li>List item one</li>
+      <li value="400">
+        List item two with subitems:
+        <ul>
+          <li>Subitem 1</li>
+          <li>Subitem 2</li>
+        </ul>
+      </li>
+      <li>Final list item</li>
+    </ol>
+
+    <dl
+        itemscope
+        itemtype="http://vocab.example.net/book"
+        itemid="urn:isbn:0-330-34032-8">
+            <dt>Title</dt>
+            <dd itemprop="title">The Reality Dysfunction</dd>
+            <dt>Author</dt>
+            <dd itemprop="author">Peter F. Hamilton</dd>
+            <dt>Publication date</dt>
+        <dd><time itemprop="pubdate" datetime="1996-01-26">26 January 1996</time></dd>
+    </dl>
+
+    <form method="POST">
+
+        <label for="color_inp">Color:</label>&nbsp;<input type="color" id="color_inp" name="color"><br>
+        Date:&nbsp;<input type="date" name="date"><br>
+        Date and time:&nbsp;<input type="datetime" name="dt"><br>
+        Date and time (local):&nbsp;<input type="datetime-local" name="dtl"><br>
+        Email:&nbsp;<input type="email" name="email" required><br>
+        Number:&nbsp;<input type="number" name="number"><br>
+        Range:&nbsp;<input type="range" name="range" min="10" max="20"><br>
+        Tel:&nbsp;<input type="tel" name="tel" disabled><br>
+        Time:&nbsp;<input type="time" name="time"><br>
+        URL:&nbsp;<input type="url" name="url"><br>
+        Month:&nbsp;<input type="month" name="month"><br>
+        Week:&nbsp;<input type="week" name="week"><br>
+        <input type="checkbox" checked><br>
+        Textarea<textarea name="desc" cols="45" rows="10"
+                 placeholder="Input description"
+                 required maxlength="450"></textarea><br>
+    </form>
+    <embed
+        src="http://www.youtube.com/v/qzA60hHca9s?version=3"
+        type="application/x-shockwave-flash"
+        width="560" height="349"
+        allowfullscreen="true">
+
+    <table border="1">
+    <tr>
+        <td rowspan="2">СТРWEB Евдоковец А. В.</td>
+        <td>сентябрь</td>
+        <td>2024г</td>
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+    </tr>
+</table>
+
+    <p><a id="n1"></a>Якорь.</p>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+<!-- room_list.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- <h2>All Rooms</h2> -->
+
+<div class="table_container" style="width: 60%;">
+  <table style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+    <caption>Rooms List</caption>
+    <thead>
+      <tr>
+        <th style="border: 2px solid #0D6D71;">Image</th>
+        <th style="border: 2px solid #0D6D71;">Number</th>
+        <th style="border: 2px solid #0D6D71;">Title</th>
+        <th style="border: 2px solid #0D6D71;">Pond</th>
+        <th style="border: 2px solid #0D6D71;">Heating</th>
+        {% if user.is_superuser %}
+        <th style="border: 2px solid #0D6D71;">Time Create/Update</th>
+        <th style="border: 2px solid #0D6D71;">Actions</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for room in rooms %}
+      <tr>
+        <td style="border: 2px solid #0D6D71;">
+          {% if room.image %}
+          <img src="{{ room.image.url }}" alt="{{ room.title }} Image" height="140" style="display: block; margin: 0 auto;">
+          {% endif %}
+        </td>
+        <td style="border: 2px solid #0D6D71;">{{ room.number }}</td>
+        <td style="border: 2px solid #0D6D71;">{{ room.title }}</td>
+        <td style="border: 2px solid #0D6D71;">{{ room.pond }}</td>
+        <td style="border: 2px solid #0D6D71;">{{ room.heating }}</td>
+        {% if user.is_superuser %}
+        <td style="border: 2px solid #0D6D71;">{{ room.time_create }} | {{ room.time_update }}</td>
+        <td style="border: 2px solid #0D6D71;">
+          <a href="{% url 'rooms:edit_room' id=room.id  %}" class="animal_action">Edit</a>
+          <a href="{% url 'rooms:delete_room' id=room.id  %}" class="animal_action">Delete</a>
+        </td>
+        {% endif %}
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="{% if user.is_superuser %}7{% else %}5{% endif %}" style="border: 2px solid #0D6D71;">No rooms available</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

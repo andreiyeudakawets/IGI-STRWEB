@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Animals</h2>
+<div class="animals_container">
+  {% if user.is_superuser %}
+  <a id="add_animal" href="{% url 'animals:add_animal' %}">Add an animal</a>
+  <!-- <a class="animal_action" href="{% url 'animals:add_animal' %}">Add an animal</a> -->
+  {% endif %}
+  <form id="sort_animals_form" action="{% url 'animals:sort_animals' %}" method="GET">
+    <label for="sort_param">Sort by:</label>
+    <select name="sort_param" id="sort_param">
+      <option value="">-- Select --</option>
+      <option value="name">Name</option>
+      <option value="age">Age</option>
+      <option value="amount_of_feed">Amount of feed</option>
+    </select>
+    <button type="submit">Sort</button>
+  </form>
+
+  <form id="search_animals_form" action="{% url 'animals:search_animals' %}" method="GET">
+    <!-- <label for="q">Search:</label> -->
+    <input type="text" name="q" placeholder="Search by name" value="{{ search_query }}">
+    <button type="submit">Search</button>
+  </form>
+</div>
+{% if animals %}
+<div class="table_container">
+
+  <table style="border-collapse: collapse; border-spacing: 0; empty-cells: show;">
+    <caption>
+      All animals table
+    </caption>
+    <thead>
+      <tr>
+        <th style="border: 2px solid #0D6D71;" id="name">Name</th>
+        <th style="border: 2px solid #0D6D71;" id="gender"> Gender</th>
+        <th style="border: 2px solid #0D6D71;" id="age">Age</th>
+        <th style="border: 2px solid #0D6D71;" id="country">Country</th>
+        <th style="border: 2px solid #0D6D71;" id="amount_of_feed">Amount of Feed (per day)</th>
+        <th style="border: 2px solid #0D6D71;" id="family">Family</th>
+        <th style="border: 2px solid #0D6D71;" id="responsible_employee">Responsible employee</th>
+        <th style="border: 2px solid #0D6D71;" id="room">Room</th>
+        <th style="border: 2px solid #0D6D71;" id="photo">Photo</th>
+        {% if user.is_superuser %}
+        <th style="border: 2px solid #0D6D71;" id="time">Time create/update</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for animal in animals %}
+      <tr>
+        <td style="border: 2px solid #0D6D71;" headers="name">{{ animal.name }}</td>
+        <td style="border: 2px solid #0D6D71;" headers="gender">{{ animal.gender }}</td>
+        <td style="border: 2px solid #0D6D71;" headers="age">{{ animal.age }}</td>
+        <td style="border: 2px solid #0D6D71;" headers="country">
+          {% for country in animal.country.all %}
+          {{ country.name }}
+          {% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        </td>
+        <td style="border: 2px solid #0D6D71;" headers="amount_of_feed">{{ animal.amount_of_feed }} g</td>
+        <td style="border: 2px solid #0D6D71;" headers="family">{{ animal.animal_class.name }} </td>
+        <td style="border: 2px solid #0D6D71;" headers="responsible_employee">{{ animal.responsible_employee }}</td>
+        <td style="border: 2px solid #0D6D71;" headers="room">{{ animal.responsible_employee.room }} </td>
+        <td style="border: 2px solid #0D6D71; 
+        /* {% if not animal.image %} background-color: #FFD700; {% endif %} */
+        "
+          headers="photo">
+          {% if animal.image %}
+          <img src="{{ animal.image.url }}" alt="{{ animal.name }} Image" height="100">
+          {% else %}
+          <!--                No photo available-->
+          {% endif %}
+        </td>
+        {% if user.is_superuser %}
+        <td style="border: 2px solid #0D6D71;" headers="time">{{ animal.time_create }}/{{ animal.time_update }}</td>
+        <td>
+          <a class="animal_action" href="/animals/edit/{{animal.id}}">Edit</a>
+          <a class="animal_action" href="/animals/delete/{{animal.id}}">Delete</a>
+        </td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<p>No animals found.</p>
+{% endif %}
+{% endblock %}

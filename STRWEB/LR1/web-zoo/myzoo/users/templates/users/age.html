@@ -1,0 +1,24 @@
+
+
+
+<body>
+    {% block content %}
+
+    <form action="/user/agify/" class="login-form" method="GET">
+        <label for="name">Введите имя:</label>
+        <input type="text" class="form-control" id="name" name="name">
+        <button type="submit" class="form-control">Проверить</button>
+    </form>
+            {% if name %}
+                <h2>Предполагаемый возраст для имени {{ name }}:</h2>
+                {% if data.age %}
+                    <p>{{ data.age }}</p>
+
+                {% else %}
+                    <p>Для данного имени не получилось посчитать возраст.</p>
+                {% endif %}
+            {% else %}
+                Ничего не введено
+            {% endif %}
+    {% endblock %}
+</body>

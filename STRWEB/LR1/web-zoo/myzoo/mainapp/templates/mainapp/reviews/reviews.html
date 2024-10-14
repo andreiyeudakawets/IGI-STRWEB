@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Reviews</h2>
+    <a id="add_review" href="{% url 'mainapp:add_review' %}">Add review</a>
+    {% if reviews %}
+        <ul class="reviews_list">
+        {% for re in reviews %}
+            <li class="reviews_list_item">
+                <p>
+                    <span>{{ re.user.username }}: {{ re.rating }}</span>
+                    <br> 
+                    <small><em>{{ re.date }}</em></small>
+                    <br>
+                    <b>{{ re.text }}</b> 
+                </p>
+                {% if user.is_superuser %}
+                    <a class="delete_review_button" href="{% url 'mainapp:delete_review' id=re.id %}">Delete</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No reviews available</p>
+    {% endif %}
+{% endblock %}

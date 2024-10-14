@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Shopping Cart {{ user }}</h2>
+{% if cart.quantity %}
+    <h3>{{ cart.products.name }}</h3>
+    <p><b>Price: </b>{{ cart.products.price }}</p>
+    <p><b>Quantity: </b>{{ cart.quantity }}</p>
+    <!-- <br><b>Quantity: </b> -->
+    <div class="cart">
+        <form method="POST" action="{% url 'mainapp:cart' %}">
+            {% csrf_token %}
+            <label for="quantity">Quantity:</label>
+            <input type="number" name="quantity" value="{{ cart.quantity }}" min="1">
+            <button type="submit" style="width: 100%;">Update Quantity</button>
+        </form>
+    
+        <form method="POST" action="{% url 'mainapp:purchase_cart' id=cart.id %}">
+            {% csrf_token %}
+            <label for="promo_code">Promo Code:</label>
+            <input type="text" id="promo_code" name="promo_code">
+            <button type="submit" style="width: 100%;">Buy</button>
+        </form>
+    </div>
+    
+        <a href="{% url 'mainapp:clear_cart' id=cart.id %}" class="code_action">Clear</a>
+        <p style="text-align: center;"><b>Total: </b>{{ total }}</p>
+
+
+{% else %}
+    <p>Cart is empty</p>
+{% endif %}
+{% endblock %}

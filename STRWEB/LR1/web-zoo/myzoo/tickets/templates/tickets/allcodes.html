@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>All Promo Codes</h2>
+    {% if user.is_superuser %}
+        <a href="{% url 'tickets:add_promo' %}" class="code_action" >Add code</a>
+    {% endif %}
+    {% if codes %}
+    <!-- <div class="code" style="border: 2px solid #0D6D71; border-radius: 8px; margin: 30px 10px; width: 40%;"> -->
+        {% for code in codes %}
+            <p class="codes">
+                {{ code.code }} | Скидка {{ code.discount_percentage }}
+                {% if user.is_superuser %}
+                    <a href="{% url 'tickets:edit_code' code_id=code.id %}" class="code_action">Edit</a>
+                    <a href="{% url 'tickets:del_code' code_id=code.id %}" class="code_action">Delete</a>
+                {% endif %}
+            </p>
+            
+        {% endfor %}
+    <!-- </div> -->
+    {% else %}
+        <p>No promo codes available</p>
+    {% endif %}
+{% endblock %}

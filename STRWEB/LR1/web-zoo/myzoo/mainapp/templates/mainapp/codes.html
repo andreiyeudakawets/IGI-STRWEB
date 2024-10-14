@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>News List</h1>
+    <ul class="codes_list">
+        {% for code in promocodes %}
+            <li class="codes_list_item">
+                <h2> {{ code }} </h2>
+                <p> {{ code.discount_percentage }} </p>
+            </li>
+        {% empty %}
+            <li>No codes found.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

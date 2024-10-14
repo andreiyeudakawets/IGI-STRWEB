@@ -1,0 +1,233 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="Евдоковец Андрей">
+    <link rel="icon" type="image/x-icon" href="/media/company_logos/logo.jpg">
+    <link rel="stylesheet" href="{% static 'css/preloader.css' %}" >
+    <!-- <link rel="stylesheet" href="{% static 'css/mystyle.css' %}" > -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+    </style>
+    <title>Zoo Management</title>
+<!--    <link rel="stylesheet" href="C:\Users\Andrei\PycharmProjects\web-zoo\myzoo\mainapp\templates\style.css">-->
+</head>
+<body>
+
+<header>
+    <div class="header_logo">
+        <a class="logo_link" href="/">
+<!--            <img src="/media/company_logos/logo.jpg" height="68" alt="Company Logo">-->
+            <img src="/media/company_logos/llll.jpg" height="68" alt="Company Logo">
+        </a>
+    </div>
+    <div class="head">
+        <h2 class="head_text">
+            Zoo by Andrei Yeudakavets
+        </h2>
+    </div>
+</header>
+
+<main>
+
+<!--    {% if us_gr == 'worker' %}-->
+<!--    <p><strong>{{ user.username }}</strong> is an employee.</p>-->
+<!--    {% elif us_gr == 'customer' %}-->
+<!--    <p><strong>{{ user.username }}</strong> is a customer.</p>-->
+<!--    {% else %}-->
+<!--    {% if user.is_authenticated %}-->
+<!--    <p><strong>{{ user.username }}</strong> is a superuser.</p>-->
+<!--    {% else %}-->
+<!--    <p>You are an <strong>unauthorized</strong> user.</p>-->
+<!--    {% endif %}-->
+<!--    {% endif %}-->
+    <nav class="menu">
+        <a class="nav_link" href="{% url 'mainapp:news' %}">News</a>
+        <a class="nav_link" href="{% url 'mainapp:questions' %}">FAQ</a>
+        <a class="nav_link" href="/employees">Contacts</a>
+        <a class="nav_link" href="{% url 'mainapp:vacancy' %}">Vacancy</a>
+        <a class="nav_link" href="{% url 'mainapp:products' %}">Products</a>
+
+        <a class="nav_link" href="/about">About</a>
+        <a href="{% url 'mainapp:codes' %}">Promocodes</a>
+        <a href="/reviews">Reviews</a>
+        <a href="/animals">Animals</a>
+        <a href="/rooms">Rooms</a>
+
+        <form id="search_animals_form1" action="{% url 'animals:search_animals' %}" method="GET">
+            <!-- <label for="q">Search:</label> -->
+            <input type="text" name="q" placeholder="Search by name" value="{{ search_query }}">
+            <button type="submit">Search</button>
+        </form>
+
+        {% if us_gr == 'customer' %}
+            <a href="/user/profile">Profile</a>
+            <a class="nav_link" href="{% url 'mainapp:cart' %}">Cart</a>
+        {% elif us_gr == 'worker' %}
+            <a href="/user/profile">Profile</a>
+        {% else %}
+
+        {% endif %}
+
+        {% if user.is_authenticated %}
+            <a class=logout_link href="/user/logout">Logout</a>
+        {% else %}
+            <a href="/user/login" class="login_link">Login</a>
+            <a class="registration_link" href="/user/register">Register</a>
+        {% endif %}
+    </nav>
+
+    <div class="base_container">
+        
+
+        <!-- <aside>
+            <h2>Связанные темы(aside)</h2>
+            <ul class="aside_list">
+                <li class="aside_list_item">
+                    <a target="_blank"
+                       rel="sponsored"
+                       href="https://youtu.be/3ATouaq7R1M?si=Vm7rEXI-k0x5Ti0Z">
+                        Jungle Animal Rescue(Video)
+                    </a>
+                </li>
+                <li class="aside_list_item">
+                    <a href="https://en.wikipedia.org/wiki/Turtle"
+                       target="_blank"
+                       rel="external">
+                        About turtles(Wiki)
+                    </a>
+                </li>
+
+                {% if user.is_superuser %}
+                    <li class="aside_list_item"><a href="/employees">View All Employees</a></li>
+                    <li class="aside_list_item"><a href="/animals/animal_family_population">Info by class</a></li>
+                    <li class="aside_list_item"><a href="{% url 'users:customers' %}">All customers</a></li>
+                    <li class="aside_list_item"><a href="{% url 'tickets:codes' %}">All promocodes</a></li>
+                    
+                    <li><a href="/tickets/user-tickets">History</a></li>
+                {% else %}
+
+                {% endif %}
+            </ul>
+        </aside> -->
+        {% block content %}
+        {% endblock %}
+    </div>
+</main>
+
+<footer class="footer">
+    <iframe id="map" src="https://yandex.ru/map-widget/v1/?um=constructor%3A0a48cde09d10c6019452dff2a1dfd27567cc94cead9a31ea35ea5aa445a3d8db&amp;source=constructor" width="100%" height="240" frameborder="0"></iframe>
+    <div class="footer_top">
+       <div class="footer_logo">
+            <a href="/" class="logo_link">
+                <img src="/media/company_logos/llll.jpg" height="68" alt="Company Logo">
+            </a>
+       </div>
+
+        <div class="footer_item">
+            <div class="footer_label">
+                for employers
+            </div>
+            <ul class="footer_list">
+                {% if user.is_superuser %}
+                <li class="footer_list_item">
+                    <a href="/employees" class="footer_list_link">View All Employees</a>
+                </li>
+                <li class="footer_list_item">
+                    <a href="/animals/animal_family_population" class="footer_list_link">Info by class</a>
+                </li>
+                <li class="footer_list_item">
+                    <a href="{% url 'users:customers' %}" class="footer_list_link">All customers</a>
+                </li>
+                <li class="footer_list_item">
+                    <a class="footer_list_link" href="/rooms" class="footer_list_link">rooms</a>
+                </li>
+                    <!-- <li><a href="/tickets/user-tickets">History</a></li> -->
+                {% else %}
+                <li class="footer_list_item">
+                    <a class="footer_list_link" href="{% url 'users:profile' %}">profile</a>
+                </li>
+                <li class="footer_list_item">
+                    <a class="footer_list_link" href="/rooms">rooms</a>
+                </li>
+                <li class="footer_list_item">
+                    {% if us_gr == 'worker' %}
+                        <a class="footer_list_link" href="/employees/animals">view my animals</a>
+                    {% endif %}
+                </li>
+                <li class="footer_list_item">
+                    <a class="footer_list_link" href="{% url 'mainapp:vacancy' %}">vacancy</a>
+                </li>
+<!--                <li class="footer_list_item">-->
+<!--                    <a class="footer_list_link" href="{% url 'users:agify' %}">Agify api</a>-->
+<!--                </li>-->
+<!--                <li class="footer_list_item">-->
+<!--                    <a class="footer_list_link" href="{% url 'mainapp:privacy' %}">Privacy</a>-->
+<!--                </li>-->
+                {% endif %}
+            </ul>
+        </div>
+        <div class="footer_item">
+            <div class="footer_label">
+                for customers
+            </div>
+            <ul class="footer_list">
+                <li class="footer_list_item">
+                    <a class="footer_list_link" href="{% url 'mainapp:questions' %}">FAQ</a>
+                </li>
+                <li class="footer_list_item">
+                    <a class="footer_list_link" href="{% url 'users:cat_facts' %}">random facts api</a>
+                </li>
+                <li class="footer_list_item">
+                    <a class="footer_list_link" href="{% url 'users:agify' %}">agify api</a>
+                </li>
+                <li class="footer_list_item">
+                    <a class="footer_list_link" href="{% url 'mainapp:privacy' %}">privacy</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer_item">
+            <div class="footer_label">
+                contacts
+            </div>
+            <ul class="footer_list">
+                <li class="footer_list_item">
+                    <a class="footer_list_link">
+                        <i class="icon_call"></i>
+                        <span class="footer_item_text">+375 (29) 780-37-50</span>
+                    </a>
+                </li>
+                <li class="footer_list_item">
+                    <a class="footer_list_link">
+                        <i class="icon_location"></i>
+                        <span class="footer_item_text">ул. Я. Коласа, д. 19</span>
+                    </a>
+                </li>
+                <li class="footer_list_item">
+                    <a class="footer_list_link">
+                        <i class="icon_message"></i>
+                        <span class="footer_item_text">mymail@gmail.com</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+   <hr class="footer_hr">
+    <div class="footer_bottom">
+        <!-- <p style="color: white">© Zoo by <b>An<wbr>drei Yeudaka<wbr>vets</b>, <em>253505</em>
+            <s>May 2024</s> Septem<wbr>ber 2024<br>
+        <abbr style="color: white" title="Belarusian State University of Informatics and Radioelectronics">BSUIR</abbr>
+        </p> -->
+        <p style="color: #F2FEFF; padding: 0 17px 17px 17px; ">
+            © Zoo by Andrei Yeudakavets 2024
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

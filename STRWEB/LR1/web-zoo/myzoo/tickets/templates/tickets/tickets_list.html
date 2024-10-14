@@ -1,0 +1,14 @@
+<h1>Show price</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" name="check_price">Check Price</button>
+</form>
+
+{% if price %}
+    <h2>Price: {{ price }}</h2>
+    <form>
+        <button type="submit" name="ok" formaction="/animals/">OK</button>
+    </form>
+{% endif %}

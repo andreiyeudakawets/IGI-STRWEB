@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Profile</h2>
+    <div class="profile">
+        {% if customer.image %}
+            <img src="{{ customer.image.url }}" alt="User Image" height="140">
+        {% endif %}
+        <div class="profile_p">
+            <p>Username: {{ customer.user.username }}</p>
+            <p>Phone number: {{ customer.phone_number }}</p>
+            <p>Age: {{ customer.age }}</p>
+        {% if groups %}
+                {% for group in groups %}
+                  <p>Status: {{ group.name }}</p>
+                {% endfor %}
+        {% else %}
+            <p>Пользователь не принадлежит ни к одной группе.</p>
+        {% endif %}
+        </div>
+    </div>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Update</button>
+    </form>
+{% endblock %}

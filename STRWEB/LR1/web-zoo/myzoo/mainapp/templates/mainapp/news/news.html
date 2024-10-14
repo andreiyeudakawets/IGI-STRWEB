@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- {% load static %} -->
+
+<!-- <link rel="stylesheet" href="{% static 'css/mystyle.css' %}" > -->
+<h2>News List</h2>
+<ul class="news_list">
+    {% for new in news %}
+    <li class="news_list_item">
+        <article class="news_article">
+            <h2 style="margin-bottom: 10px; margin-top: 0;"> {{ new }} </h2>
+            <img src="{{ new.image.url }}" alt="Изображение" height="100">
+            <p class="new_summary"> {{ new.summary}} </p>
+            <a href="{% url 'mainapp:get_news' id=new.id %}" class="read_more">Read more</a>
+        </article>
+    </li>
+    {% empty %}
+    <li>No news found.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

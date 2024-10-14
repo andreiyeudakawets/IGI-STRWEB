@@ -1,0 +1,45 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Employee List</h2>
+    {% if user.is_superuser %}
+        <div class="employee_search"
+        style="display: flex;
+                margin: 25px;
+                justify-content: center">
+            <a class="employee_action" href="/employees/add/">Add employee</a>
+            <form action="{% url 'employees:search_employees' %}" method="GET" class="search_employee">
+                <input type="text" name="q" placeholder="Search by room" value="{{ search_query }}">
+                <button type="submit" class="search_button" id="employee_search">Search</button>
+            </form>
+        </div>
+    {% endif %}
+
+    <ul class="employee_list">
+        {% for employee in employees %}
+            <li class="employee_list_item">
+                {% if employee.image %}
+                <img class="employee_img"
+                             src="{{ employee.image.url }}" alt="{{ employee.user.name }} Image" height="100">
+                {% else %}
+                <img class="employee_img"
+                             src="/media/users_images/none.png" alt="{{ employee.user.name }} Image" height="100">
+                {% endif %}
+                <p class="employee_info">
+                    {{ employee }}
+                    <br>{{ employee.position.title }}.
+                    <br>{{ employee.room.title }}
+                    <br>{{ employee.phone_number }}
+                    <br>
+                </p>
+                    {% if user.is_superuser %}
+                <a class="employee_action" href="/employees/edit-employee/{{ employee.id }}/">Edit</a>
+                <a class="employee_action" href="/employees/delete-employee/{{ employee.id }}/">Delete</a>
+            </li>
+                {% endif %}
+        {% empty %}
+            <li><p>No employees found.</p></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

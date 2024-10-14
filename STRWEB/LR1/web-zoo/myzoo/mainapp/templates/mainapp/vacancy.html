@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="vacancy">
+    <h2 class="vacancy_title">Vacancy List</h2>
+    <p class="vacancy_phone" style="text-align: center;">Звонить: +375 (29) 500-60-70</p>
+
+    <ul class="vacancy_list">
+        {% for item in vacancy %}
+        <li class="vacancy_list_item">
+            <article class="vacancy_article">
+                <h2> {{ item }} </h2>
+                <img src="{{ item.image.url }}" alt="Изображение" height="85">
+                <p> {{ item.description}} </p>
+            </article>
+        </li>
+        {% empty %}
+            <li>No news found.</li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

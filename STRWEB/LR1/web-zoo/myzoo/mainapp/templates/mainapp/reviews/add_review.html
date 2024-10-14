@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Review</h2>
+<div class="add_review">
+  <form method="post">
+    {% csrf_token %}
+    {{ form.rating.label_tag }} <input type="number" name="rating" max="5" min="1" placeholder="1-5"><br>
+    {{ form.text.label_tag }} 
+    <!-- {{ form.text }} -->
+    <input type="text" name="text" placeholder="Your opinion">
+    <button type="submit">Add Review</button>
+  </form>
+</div>
+{% endblock %}

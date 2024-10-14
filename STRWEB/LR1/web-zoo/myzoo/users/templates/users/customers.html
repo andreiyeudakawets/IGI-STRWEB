@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Клиенты:</h2>
+    <ul>
+        <p>Total income: {{ total }}</p>
+        <p>mode by spendings: {{ spendings_mode }}</p>
+        <p>median by spendings: {{ spendings_median }}</p>
+        <p>mean by spendings: {{ spendings_mean }}</p>
+        <div id="chart-container">{{ plot_div|safe }}</div>
+      {% for customer in customers %}
+          <li>
+            {% if customer.image %}
+              <img src="{{ customer.image.url }}" alt="Фото пользователя" height="100">
+            {% endif %}
+            <p>Имя пользователя: {{ customer.user.username }}</p>
+            <p>Телефон: {{ customer.phone_number }}</p>
+            <p>Возраст: {{ customer.age }}</p>
+            <p>Траты: {{ customer.spendings }}</p>
+              <a href="/user/delete-customer/{{ customer.id }}/">Delete</a> <br><br>
+          </li>
+      {% endfor %}
+    </ul>
+
+{% endblock %}
